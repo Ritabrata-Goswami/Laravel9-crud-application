@@ -120,12 +120,12 @@ class login_controller extends Controller
             
             if(empty($file))
             {
-                $insert=DB::insert("CALL save_edit(?,?,?,?,?,?)",[$id,$name,$gen,$edu,$state,$file_default_name]);
+                $insert=DB::update("CALL save_edit(?,?,?,?,?,?)",[$id,$name,$gen,$edu,$state,$file_default_name]);
                 return redirect("/dashboard");
             }
             else{
                 $file_name=$request->file('upload-photo')->getClientOriginalName();
-                $insert=DB::insert("CALL save_edit(?,?,?,?,?,?)",[$id,$name,$gen,$edu,$state,$file_name]);
+                $insert=DB::update("CALL save_edit(?,?,?,?,?,?)",[$id,$name,$gen,$edu,$state,$file_name]);
                 $request->file('upload-photo')->move(public_path('/image_file'),$file_name);
                 return redirect("/dashboard");
             }
